@@ -9,7 +9,7 @@ from rest_framework.validators import UniqueValidator  # 이메일 중복 방지
 class RegisterSerializer(serializers.ModelSerializer):  # 회원가입 시리얼라이저
     email = serializers.EmailField(
         required=True,
-        validators=[UniqueValidator(querysety=User.objects.all())],  # 이메일에 대한 중복 검증
+        validators=[UniqueValidator(queryset=User.objects.all())],  # 이메일에 대한 중복 검증
     )
     password = serializers.CharField(
         write_only=True,
