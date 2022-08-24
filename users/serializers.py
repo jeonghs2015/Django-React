@@ -64,3 +64,5 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ("nickname", "position", "subjects", "image")
         # extra_kwargs = {"image": {"required": False, "allow_null": True}}
+
+
