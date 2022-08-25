@@ -26,23 +26,17 @@ class Login extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    console.log("[Login.js] Constructor");
-    super(props);
-    this.state = {
-      username: "",
-      password: "",
-    };
+    console.log("[Login.js] handleSubmit");
     axios
-      .post("http://localhost:8000/users/signin/", {
-        Username: this.state.username,
-        Password: this.state.password,
+      .post("http://localhost:8000/users/login/", {
+        username: this.state.username,
+        password: this.state.password,
       })
       .then((response) => {
         if (response.status < 300) {
           console.log("[Login.js] Call props.doLogin");
           this.props.doLogin();
           localStorage.setItem("token", response.data["token"]);
-          localStorage.setItem("userId", response.data["UserID"]);
           localStorage.setItem("username", this.state.username);
           console.log(response.data);
           this.props.history.push("/");
