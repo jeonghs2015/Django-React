@@ -22,7 +22,10 @@ class App extends Component {
       // eslint-disable-next-line
       isLogin: token != "null",
     };
-    
+    console.log("[App.js] token: ", token);
+    console.log("[App.js] isLogin: ", this.state.isLogin);
+    this.doLogin = this.doLogin.bind(this);
+    this.doLogout = this.doLogout.bind(this);
   }
   doLogin() {
     console.log("[App.js] doLogin");
