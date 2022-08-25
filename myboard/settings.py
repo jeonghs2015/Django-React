@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url
 import environ
+import whitenoise
 env = environ.Env()
 environ.Env.read_env()
 
@@ -28,9 +29,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'jj4o(#fnq!8c^rjcc%5xs30%7vy3&f5d&bvjg5d$5@&4z@rg)1'
 # SECRET_KEY = 'jj4o(#fnq!8c^rjcc%5xs30%7vy3&f5d&bvjg5d$5@&4z@rg)1'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -59,7 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhitenoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
