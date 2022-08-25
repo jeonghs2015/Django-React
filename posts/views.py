@@ -5,10 +5,10 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from users.models import Profile
-from .models import Post
+from .models import Post, Comment
 
 from .permissions import CustomReadOnly
-from .serializers import PostSerializer, PostCreateSerializer
+from .serializers import PostSerializer, PostCreateSerializer, CommentSerializer, CommentCreateSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 # view마다 필터 설정할 때 사용(settings.py에 이미 등록해서 상관없음)
 
@@ -41,3 +41,18 @@ def like_post(request, pk):
         post.likes.add(request.user)
 
     return Response({'status': 'ok'})
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    permission_classes = [CustomReadOnly]
+
+    def get_serializer_class(self):
+        if self.action == 'list' or 'retrieve':
+            return CommentSerializer
+        return CommentCreateSerializer
+    
+    def perform_create(self, serializer):
+        profile = Profile.objects.get(user=self.request.user)
+        serializer.save(author=self.request.user, profile=profile)
+
