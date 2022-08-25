@@ -26,9 +26,14 @@ class Login extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    console.log("[Login.js] handleSubmit");
+    console.log("[Login.js] Constructor");
+    super(props);
+    this.state = {
+      username: "",
+      password: "",
+    };
     axios
-      .post("http://localhost:8080/api/users/signin/", {
+      .post("http://localhost:8000/users/signin/", {
         Username: this.state.username,
         Password: this.state.password,
       })
